@@ -66,7 +66,7 @@ class HashTable:
         for i in key[1:]:  # for letter in the string that is passed
             hash = ((hash << 5) + hash) + ord(i) # zero fill left shift
         return hash & 0xFFFFFFFF
-
+# [:7]
     def hash_index(self, key):
         """
         Take an arbitrary key and return a valid integer index
@@ -96,7 +96,9 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        index = self.hash_index(key)
+
+        self.table[index] = None
 
     def get(self, key):
         """
