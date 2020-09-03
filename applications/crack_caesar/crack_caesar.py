@@ -1,9 +1,7 @@
 # Use frequency analysis to find the key to ciphertext.txt, and then
 # decode it.
 
-import sys
-
-f = open('C:\\Users\\Shane\\Desktop\\Class-Folder\\cs-module-project-hash-tables\\applications\\crack_caesar\\ciphertext.txt')
+f = open('ciphertext.txt')
 # print(f.read())
 text = f.read()
 f.close()
@@ -27,14 +25,13 @@ def letter_count(text):
             total += 1
     # return d
 letter_count(text) # calling letter_count to fill dict d
-print(d.get('L'))
+# print(d.get('L'))
 cracked = ""
 # take the numbers in d and divide them by the total * 100 to 2 significant digits to get their percentages.
 for l in text:
     if (l >= 'A' and l <= 'Z'):
         num = int(d.get(l))
         percentage = round((num / total) * 100, 2)
-        # letter_count[l] = percentage
         if percentage == 11.53:
             cracked += "E"
         if percentage == 9.75:
