@@ -34,6 +34,6 @@ for word in text:
         histo[word] += '#'
 
 # histo.sort()
-# h = list(histo.items())
-# h.sort()
-# print(h)
+h = list(histo.items())
+h.sort(key=lambda w: w[1])
+print(h)
