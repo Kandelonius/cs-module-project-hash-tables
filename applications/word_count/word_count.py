@@ -1,17 +1,21 @@
-punc = '''!()-[]{};:"\, <>./?@#$%^&*_~'''
+import re
+
+
+punc = '''" : ; , . - + = / \ | [ ] { } ( ) * ^ &'''.split(" ")
 
 def word_count(s):
     words = {}
     if s == "":
         return words
-    if s == '":;,.-+=/\\|[]{}()*^&':
-        return words
-    text = s.lower().strip().split(" ")
-    for word in text:
-        word = word.strip('":;,.-+=/\\|[]{}()*^&')
+    # if s == '":;,.-+=/\\|[]{}()*^&':
+    #     return words
+    text = re.sub('[\"\:\;\,\.\-\+\=\/\\\|\[\]\{\}\(\)\*\^\&]', '', s)
+    for word in text.lower().split():
+        # word = word.strip('":;,.-+=/\\|[]{}()*^&')
         # for l in word:
         #     if l in punc:
-        #         word = word.replace(l, "")
+        #         l.strip('":;,.-+=/\\|[]{}()*^&\r\n\t')
+        # #         word = word.replace(l, "")
         if word == "":
             continue
         if word not in words:
@@ -19,7 +23,6 @@ def word_count(s):
         else:
             words[word] += 1
     return words
-
 
 if __name__ == "__main__":
     print(word_count("Hello    hello"))
