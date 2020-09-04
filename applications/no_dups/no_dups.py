@@ -1,7 +1,17 @@
+
+filter = {}
+new = []
+
 def no_dups(s):
-    # Your code here
-
-
+    string = s.split(" ")
+    for l in string:
+        if l not in filter:
+            filter[l] = 1
+            new.append(l)
+        else:
+            continue
+    new_string = " ".join(new)
+    return new_string.strip()
 
 if __name__ == "__main__":
     print(no_dups(""))
