@@ -1,9 +1,15 @@
 # Your code here
+# In Python, a dict key can be any immutable type... including a tuple.
 
-
+dict = {}
 def expensive_seq(x, y, z):
-    # Your code here
-
+    # index = 0
+    if x <= 0:
+        return (y + z)
+    if (x, y, z) not in dict:
+        dict[(x, y, z)] = expensive_seq(x - 1, y + 1, z) + expensive_seq(x - 2, y + 2, z * 2) + expensive_seq(x - 3, y + 3, z * 3)
+        # index += 1
+    return dict[(x, y, z)]
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ class HashTableEntry:
     """
     Linked List hash table key/value pair
     """
+
     def __init__(self, key, value):
         self.key = key
         self.value = value
@@ -16,13 +17,11 @@ class HashTable:
     """
     A hash table that with `capacity` buckets
     that accepts string keys
-
     Implement this.
     """
-
+    # table = []
     def __init__(self, capacity):
-        # Your code here
-
+        self.table = [None] * capacity
 
     def get_num_slots(self):
         """
@@ -34,18 +33,18 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
+        return len(self.table)
 
     def get_load_factor(self):
         """
         Return the load factor for this hash table.
-
+        load factor = n/k
+        where n is the number of entries in the table
+        where k is the number of buckets
         Implement this.
         """
-        # Your code here
-
-
+        # return len(self.table) / self.capacity
+        pass
     def fnv1(self, key):
         """
         FNV-1 Hash, 64-bit
@@ -53,25 +52,28 @@ class HashTable:
         Implement this, and/or DJB2.
         """
 
-        # Your code here
-
+        pass
 
     def djb2(self, key):
         """
         DJB2 hash, 32-bit
 
         Implement this, and/or FNV-1.
+        uses bit manipulation and prime numbers to create a hash index from a string
         """
-        # Your code here
-
-
+        # total = 0
+        hash = 5381  # our prime number
+        for i in key[1:]:  # for letter in the string that is passed
+            hash = ((hash << 5) + hash) + ord(i) # zero fill left shift
+        return hash & 0xFFFFFFFF
+# [:7]
     def hash_index(self, key):
         """
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
         """
-        #return self.fnv1(key) % self.capacity
-        return self.djb2(key) % self.capacity
+        # return self.fnv1(key) % self.capacity
+        return self.djb2(key) % self.get_num_slots()
 
     def put(self, key, value):
         """
@@ -81,7 +83,9 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        index = self.hash_index(key)
+        if self.table[index] is None:
+            self.table[index] = value
 
 
     def delete(self, key):
@@ -92,8 +96,9 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        index = self.hash_index(key)
 
+        self.table[index] = None
 
     def get(self, key):
         """
@@ -103,8 +108,10 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
+        if self.table[self.hash_index(key)]:
+            return self.table[self.hash_index(key)]
+        else:
+            return None
 
     def resize(self, new_capacity):
         """
@@ -114,7 +121,6 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
 
 
 if __name__ == "__main__":

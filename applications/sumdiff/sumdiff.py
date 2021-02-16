@@ -2,6 +2,7 @@
 find all a, b, c, d in q such that
 f(a) + f(b) = f(c) - f(d)
 """
+sumdiffs = {}
 
 #q = set(range(1, 10))
 #q = set(range(1, 200))
